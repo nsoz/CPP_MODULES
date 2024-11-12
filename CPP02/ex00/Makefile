@@ -4,7 +4,7 @@ CC = c++
 
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 
-SRCS = Fixed.cpp main.cpp
+SRCS = $(wildcard *.cpp)
 
 OBJS = $(SRCS:.cpp=.o)
 

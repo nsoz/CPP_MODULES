@@ -5,16 +5,17 @@ Fixed::Fixed() : raw(0)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& var) : raw(var.raw)
+Fixed::Fixed(const Fixed& var)
 {
      std::cout << "Copy constructor called" << std::endl;
+     *this = var;
 }
 
 Fixed& Fixed::operator=(const Fixed& var)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
     if (&var != this)
-        this->raw = var.raw;
+        this->raw = var.getRawBits();
+    std::cout << "Copy assignment operator called" << std::endl;
     return (*this);
 }
 
@@ -24,9 +25,9 @@ Fixed::Fixed(int num)
     raw = num << fractional_bits;
 }
 
-Fixed::Fixed(float num) // CHECK THİS FUNC (ROUNDF)
+Fixed::Fixed(float num)
 {
-    raw = (num * (float)(1 << fractional_bits));
+    raw = roundf(num * (float)(1 << fractional_bits));  
     std::cout << "Float constructor called" << std::endl;
 }
 
