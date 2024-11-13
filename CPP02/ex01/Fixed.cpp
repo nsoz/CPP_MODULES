@@ -1,63 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgunay <42istanbul.com.tr>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/11 18:47:52 by fgunay            #+#    #+#             */
+/*   Updated: 2024/08/11 18:47:54 by fgunay           ###   ########.tr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
-Fixed::Fixed() : raw(0)
+Fixed::Fixed() : value(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& var)
+Fixed::Fixed(const Fixed &copy)
 {
-     std::cout << "Copy constructor called" << std::endl;
-     *this = var;
+	std::cout << "Copy constructor called" << std::endl;
+    *this = copy;
+	//this->operator=(copy);
 }
 
-Fixed& Fixed::operator=(const Fixed& var)
+Fixed &Fixed::operator=(Fixed const &number)
 {
-    if (&var != this)
-        this->raw = var.getRawBits();
-    std::cout << "Copy assignment operator called" << std::endl;
-    return (*this);
+	std::cout << "Copy assignment operator called" << std::endl;
+
+	this->value = number.getRawBits();
+
+	return *this;
 }
 
-Fixed::Fixed(int num)
+Fixed::Fixed(const int intVal)
 {
-    std::cout << "Int constructor called" << std::endl;
-    raw = num << fractional_bits;
+	std::cout << "Int constructor called" << std::endl;
+	value = intVal << bits; // or value = intVal * 256;
 }
 
-Fixed::Fixed(float num)
+Fixed::Fixed(const float floatVal)
 {
-    raw = roundf(num * (float)(1 << fractional_bits));  
-    std::cout << "Float constructor called" << std::endl;
+	std::cout << "Float constructor called" << std::endl;
+	value = (floatVal * (float)(1 << bits)); // or value = roundf(floatVal * 256.0f));
 }
 
-Fixed::~Fixed()
+int Fixed::toInt() const
 {
-    std::cout << "Destructor called" << std::endl;
+	return (value >> bits); // or value / 256
 }
 
-float Fixed::toFloat( void ) const
+float Fixed::toFloat() const
 {
-    return ((float)raw / (1 << fractional_bits));
+	return ((float)value / (1 << bits)); // or (float) / 256
 }
 
-int Fixed::toInt( void ) const
+std::ostream &operator<<(std::ostream &os, Fixed const &fixed)
 {
-    return (raw >> fractional_bits);
+	os << fixed.toFloat();
+	return os;
 }
 
 int Fixed::getRawBits() const
 {
-    return(this->raw);
+	return (this->value);
 }
 
-void    Fixed::setRawBits(int raw)
+void Fixed::setRawBits(int const raw)
 {
-    this->raw = raw;
+	this->value = raw;
 }
 
-std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+Fixed::~Fixed()
 {
-    os << fixed.toFloat();
-    return (os);
+	std::cout << "Destructor called" << std::endl;
 }
