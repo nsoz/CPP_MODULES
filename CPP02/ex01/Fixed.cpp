@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgunay <42istanbul.com.tr>                 +#+  +:+       +#+        */
+/*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:47:52 by fgunay            #+#    #+#             */
-/*   Updated: 2024/08/11 18:47:54 by fgunay           ###   ########.tr       */
+/*   Updated: 2024/11/17 17:38:36 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ Fixed::Fixed(const Fixed &copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
     *this = copy;
-	//this->operator=(copy);
 }
 
 Fixed &Fixed::operator=(Fixed const &number)
@@ -36,23 +35,23 @@ Fixed &Fixed::operator=(Fixed const &number)
 Fixed::Fixed(const int intVal)
 {
 	std::cout << "Int constructor called" << std::endl;
-	value = intVal << bits; // or value = intVal * 256;
+	value = intVal << bits;
 }
 
 Fixed::Fixed(const float floatVal)
 {
 	std::cout << "Float constructor called" << std::endl;
-	value = (floatVal * (float)(1 << bits)); // or value = roundf(floatVal * 256.0f));
+	value = roundf(floatVal * (float)(1 << bits));
 }
 
 int Fixed::toInt() const
 {
-	return (value >> bits); // or value / 256
+	return (value >> bits);
 }
 
 float Fixed::toFloat() const
 {
-	return ((float)value / (1 << bits)); // or (float) / 256
+	return ((float)value / (1 << bits));
 }
 
 std::ostream &operator<<(std::ostream &os, Fixed const &fixed)

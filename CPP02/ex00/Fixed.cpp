@@ -21,7 +21,6 @@ Fixed::Fixed(const Fixed &copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
     *this = copy;
-	//this->operator=(copy);
 }
 
 Fixed &Fixed::operator=(Fixed const &number)
