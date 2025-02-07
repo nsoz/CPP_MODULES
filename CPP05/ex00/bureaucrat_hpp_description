@@ -1,0 +1,27 @@
+📌 Açıklamalar
+Header Guard (#ifndef BUREAUCRAT_HPP ... #endif):
+#ifndef BUREAUCRAT_HPP → Eğer bu tanım yoksa
+#define BUREAUCRAT_HPP → Tanımı yap
+#endif → Kapat
+Değişkenler (_name ve _grade):
+_name: Sabit bir değer olduğu için const std::string olarak tanımlandı.
+_grade: 1 ile 150 arasında olmalı. Bunun kontrolünü yapacağız.
+İstisna (Exception) Sınıfları:
+GradeTooHighException: Derece 1'den düşükse fırlatılacak.
+GradeTooLowException: Derece 150'den büyükse fırlatılacak.
+what() fonksiyonu std::exception sınıfını override edecek.
+Canonical Form Gereklilikleri:
+Default Constructor (Bureaucrat())
+Parametreli Constructor (Bureaucrat(const std::string& name, int grade))
+Copy Constructor (Bureaucrat(const Bureaucrat& other))
+Assignment Operator (Bureaucrat& operator=(const Bureaucrat& other))
+Destructor (~Bureaucrat())
+Getter Fonksiyonları:
+getName(): İsmi döndürür.
+getGrade(): Dereceyi döndürür.
+Dereceyi Değiştiren Fonksiyonlar:
+incrementGrade(): Dereceyi arttırır (1'e yaklaşır).
+decrementGrade(): Dereceyi azaltır (150'ye yaklaşır).
+Operatör Aşırı Yükleme (operator<<):
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
+Bürokrat bilgilerini yazdırmak için kullanılacak.
