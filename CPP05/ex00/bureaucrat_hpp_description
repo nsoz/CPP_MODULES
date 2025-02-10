@@ -1,27 +1,85 @@
 📌 Açıklamalar
-Header Guard (#ifndef BUREAUCRAT_HPP ... #endif):
-#ifndef BUREAUCRAT_HPP → Eğer bu tanım yoksa
-#define BUREAUCRAT_HPP → Tanımı yap
-#endif → Kapat
-Değişkenler (_name ve _grade):
-_name: Sabit bir değer olduğu için const std::string olarak tanımlandı.
-_grade: 1 ile 150 arasında olmalı. Bunun kontrolünü yapacağız.
-İstisna (Exception) Sınıfları:
-GradeTooHighException: Derece 1'den düşükse fırlatılacak.
-GradeTooLowException: Derece 150'den büyükse fırlatılacak.
-what() fonksiyonu std::exception sınıfını override edecek.
-Canonical Form Gereklilikleri:
-Default Constructor (Bureaucrat())
-Parametreli Constructor (Bureaucrat(const std::string& name, int grade))
-Copy Constructor (Bureaucrat(const Bureaucrat& other))
-Assignment Operator (Bureaucrat& operator=(const Bureaucrat& other))
-Destructor (~Bureaucrat())
-Getter Fonksiyonları:
-getName(): İsmi döndürür.
-getGrade(): Dereceyi döndürür.
-Dereceyi Değiştiren Fonksiyonlar:
-incrementGrade(): Dereceyi arttırır (1'e yaklaşır).
-decrementGrade(): Dereceyi azaltır (150'ye yaklaşır).
-Operatör Aşırı Yükleme (operator<<):
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
-Bürokrat bilgilerini yazdırmak için kullanılacak.
+
+->  <iostream> bu sınıf cout veya cın fonksiyonlarını çalıştırmak için kullanılır
+->  <stdexcept> bu sınıf ise hata ve istisna durumlarını handle edeeck fonksiyonları içerir
+
+
+
+~sınıf tanımı~
+
+        class Bureaucrat {
+            private:
+            const std::string _name; //-> isim
+            int_grade; //-> seviye 1 ile 150 arasında olacak
+
+* bu sınıf bürokratik bir çalışanın temel özelliklerini ele alıyor *
+    name = bahsi geçen bürokratik çalışanın ismi -> const yapıs bu değişkenin bir tek yapıcı fonksiyonla başlatılacağını ve başka bir şekilde değiştirilemiyeceğini belirtmektedir
+    grade = bahsi geçen bürokratik çalışanın sevyesi en yüksek sevye 1 \ en düşük sevye 150
+
+~istisna sınıfalrı~
+
+        public:
+        // Exception classes
+        class GradeTooHighException : public std::exception { // derece 1 den küçükse döndürelecek
+        public:
+        const char* what() const throw();
+    };
+
+        class GradeTooLowException : public std::exception { // derece 150 den büyükse " "
+        public:
+        const char* what() const throw();
+    };
+
+bu sınıfta bürokratın sevyesi kontrol edilerek geçerli aralıkta olup olmadığı kontrol ediliyor
+
+GradeTooHighException : bu fonksiyon çalışan sevyesinin 1 den küçük olduğu durumlarda döndürlecek fonksiyondur
+    'what fonksiyonu bu istisnanın ne olduğunu açıkalyan bir açıklama metni ile Bureaucrat.cpp dosyasında eşleşip ilgili metni döndürecektir'
+GradeTooLowException : bu fonksiyon çalışan sevyesinin 150 den büyük olduğu durumlarda döndürlecek fonksiyondur
+    'what fonksiyonu bu istisnanın ne olduğunu açıkalyan bir açıklama metni ile Bureaucrat.cpp dosyasında eşleşip ilgili metni döndürecektir'
+
+                "HER İKİ İSTİSNADA std::exception HATA SINIFINDAN TÜRETİLMİŞTİR BU SINIF C++ KÜTÜPHANELERİNDE TÜM HATA SINIFLARININDA BULUNAN ORTAK BİR SINIFTIR"
+
+~ORTADOKS KANONİK FORM~
+
+    // Orthodox Canonical Form
+    Bureaucrat();
+    Bureaucrat(const std::string& name, int grade); 
+    Bureaucrat(const Bureaucrat& other);
+    Bureaucrat& operator=(const Bureaucrat& other);
+    ~Bureaucrat();
+
+    Bu satırlarda Ortodoks Kanonik Form (Orthodox Canonical Form) olarak bilinen bir yapı tanımlanıyor. C++ta, bir sınıfın kopyalanabilir ve taşınabilir olması için özel
+    fonksiyonların tanımlanması gerekir. Bu fonksiyonlar, sınıfın nesnelerinin doğru bir şekilde kopyalanmasını ve yönetilmesini sağlar.
+
+Bureaucrat();: Bu, varsayılan yapıcı (default constructor) fonksiyonudur. Bu fonksiyon, bir Bureaucrat nesnesi oluşturulduğunda çağrılır.
+;Eğer sınıfın özel bir yapıcı fonksiyonu yoksa, bu varsayılan yapıcı fonksiyon devreye girer.
+
+Bureaucrat(const std::string& name, int grade);: Bu, parametreli yapıcı fonksiyondur. name ve grade parametreleri alarak bir Bureaucrat nesnesi oluşturulmasını sağlar.
+;Bu fonksiyon, nesnenin adı ve derecesi gibi özelliklerini başlatmak için kullanılır.
+
+Bureaucrat(const Bureaucrat& other);: Bu, kopya yapıcı fonksiyonudur. other adlı başka bir Bureaucrat nesnesinin içeriğini, yeni oluşturulan nesneye kopyalar.
+;Bu fonksiyon, nesnelerin kopyalanması sırasında doğru bir şekilde veri aktarılmasını sağlar.
+
+Bureaucrat& operator=(const Bureaucrat& other);: Bu, atama operatorü fonksiyonudur. Bu fonksiyon, bir Bureaucrat nesnesine başka bir Bureaucrat nesnesinin verilerini atar.
+;Bu fonksiyon, nesne ataması yapıldığında doğru kopyalama işlemi yapmayı garanti eder.
+
+~Bureaucrat();: Bu, yıkıcı (destructor) fonksiyonudur. Nesne bellekten serbest bırakılmadan önce çağrılır.
+;Bu fonksiyon, nesnenin yaşam döngüsünün sonlandırılması sırasında yapılması gereken temizlik işlemleri için kullanılır.
+
+~GETTER FONKSİYONALARI~
+
+    // Getters
+    std::string getName() const;
+    int getGrade() const;
+
+getName() const ;bu fonksiyon çağırıldığında sınıfın name parametresini döndürecek olan getter fonksiyonu //=\\ const parametresi bu fonksiyonun sınf içersinde herhangi bir değişiklik yapmayacağını belirtir
+getGrade() ;bu fonksiyon çağırıldığında sınıfın grade parametresini döndürecek olan getter fonksiyonu     \\=// const parametresi bu fonksiyonun sınf içersinde herhangi bir değişiklik yapmayacağını belirtir
+
+~SETTER FONKSİYONLARI~
+
+    // Grade modification functions
+    void incrementGrade(); void incrementGrade();: Bu fonksiyon, bürokratın derecesini bir artırmak için kullanılır.
+    ;Dereceyi artırırken, seviye sınırlarına dikkat edilmelidir. Bu fonksiyon, bir bürokratın seviyesini "yükseltmek" için kullanılacaktır,
+    ;ancak bu işlem sınırsız bir şekilde yapılamaz çünkü seviye 1'den daha düşük olamaz.
+    void decrementGrade(); Bu fonksiyon, bürokratın derecesini bir azaltmak için kullanılır. Dereceyi azaltırken, yine geçerli seviye sınırlarının içinde kalınması gerekir.
+    ;Bu fonksiyon, bir bürokratın seviyesini "düşürmek" için kullanılacaktır, ancak 150'den daha yüksek bir seviye olamaz.

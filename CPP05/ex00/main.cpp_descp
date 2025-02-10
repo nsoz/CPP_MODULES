@@ -1,0 +1,41 @@
+~include~
+
+#include "Bureaucrat.hpp" → Bureaucrat sınıfının tanımlandığı başlık dosyasını dahil ediyoruz. Bu sınıfın içinde muhtemelen ad, derece (grade), artırma/azaltma fonksiyonları ve istisna yönetimi bulunuyor.
+#include <iostream> → Standart giriş/çıkış işlemleri (std::cout, std::cerr) için gerekli olan kütüphane dahil ediliyor.
+ 
+~Bureaucrat Nesnesi Oluşturma ve Kullanımı~~
+    try {
+        // Geçerli bir Bureaucrat nesnesi oluşturma
+        Bureaucrat bob("Bob", 42);
+        std::cout << bob << std::endl;
+
+try bloğu ile hata fırlatma (exception handling) mekanizması başlatılıyor.
+"Bob" isimli ve 42 derecesine sahip bir Bureaucrat nesnesi oluşturuluyor.
+std::cout << bob << std::endl; satırı, Bureaucrat nesnesinin ekrana yazdırılmasını sağlıyor. Bureaucrat sınıfında operator<< aşırı yüklenmiş olmalı ki nesneyi direkt olarak yazdırabiliyoruz.
+
+        // Dereceyi artırma
+        bob.incrementGrade();
+        std::cout << "After increment: " << bob << std::endl;
+
+incrementGrade() fonksiyonu çağrılıyor. Bu fonksiyon, bob nesnesinin grade değerini azaltarak (örneğin, 42 → 41) yükseltmesini sağlıyor.
+Yeni derece std::cout ile ekrana yazdırılıyor.
+
+        // Dereceyi azaltma
+        bob.decrementGrade();
+        std::cout << "After decrement: " << bob << std::endl;
+
+decrementGrade() fonksiyonu çağrılıyor. Bu fonksiyon, bob nesnesinin grade değerini artırarak (örneğin, 41 → 42) düşürmesini sağlıyor.
+Yeni derece ekrana yazdırılıyor.
+
+    }
+    catch (std::exception &e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
+Eğer Bureaucrat sınıfı içerisinde incrementGrade() veya decrementGrade() işlemi sırasında bir hata (exception) fırlatılırsa, bu catch bloğu çalışır.
+e.what() fonksiyonu, hatanın açıklamasını ekrana basar.
+
+~genel olarak~
+
+✅ Bob adında bir bürokrat oluşturduk.
+✅ Derecesini artırıp azalttık.
+✅ Hata durumları için try-catch yapısını kullandık.
