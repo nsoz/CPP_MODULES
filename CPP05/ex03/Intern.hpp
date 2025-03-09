@@ -7,8 +7,8 @@
 #include "PresidentialPardonForm.hpp"
 #include <iostream>
 
-class Intern {
-public:
+class Intern { // bir intern sınıfı tanımlıyoruz
+public:  // public değişkenlerinde ortodoks kaonik
     // Constructor and Destructor
     Intern();
     Intern(const Intern& other);
@@ -16,7 +16,7 @@ public:
     ~Intern();
 
     // Form creation function
-    AForm* makeForm(const std::string& formName, const std::string& target);
+    AForm* makeForm(const std::string& formName, const std::string& target); // form yaratma fonksiyonu
 };
 
 #endif

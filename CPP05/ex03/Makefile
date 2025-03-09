@@ -1,4 +1,4 @@
-NAME = bureaucrat
+NAME = interns
 
 SRCS = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp \
        PresidentialPardonForm.cpp Intern.cpp main.cpp

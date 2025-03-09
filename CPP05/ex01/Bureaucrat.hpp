@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "Form.hpp" // Form sınıfını ekledik
+#include "Form.hpp" // Form sınıfını ekledik artık form sınıfı ile Bureaucrat sınfıı etkileşim halinde
 
 class Bureaucrat {
 private:
@@ -37,8 +37,8 @@ public:
     void incrementGrade();
     void decrementGrade();
 
-    // New function to sign forms
-    void signForm(Form& form);
+    // New function to sign forms form imzalama işleminin yapılacağı fonksiyon
+    void signForm(Form& form); 
 };
 
 // Overloaded << operator

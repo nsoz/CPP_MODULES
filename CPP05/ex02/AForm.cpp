@@ -2,9 +2,9 @@
 #include "Bureaucrat.hpp"
 
 // Constructor
-AForm::AForm() : _name("Default"), _isSigned(false), _signGrade(150), _executeGrade(150) {}
+AForm::AForm() : _name("Default"), _isSigned(false), _signGrade(150), _executeGrade(150) {} // yapocı liste ile başlatılır
 
-AForm::AForm(const std::string& name, int signGrade, int executeGrade)
+AForm::AForm(const std::string& name, int signGrade, int executeGrade) // yapıcı liste ile başlatılır grade değeri bir kontrol aşamasına sokulur
     : _name(name), _isSigned(false), _signGrade(signGrade), _executeGrade(executeGrade) {
     if (signGrade < 1 || executeGrade < 1)
         throw GradeTooHighException();
@@ -18,10 +18,10 @@ AForm::AForm(const AForm& other)
 
 // Assignment Operator
 AForm& AForm::operator=(const AForm& other) {
-    if (this != &other) {
-        _isSigned = other._isSigned;
+    if (this != &other) { // kendi kendine eşitleme yapmaması için konulan kontrol
+        _isSigned = other._isSigned; //geriye kalan tüm değişkenler zaten her Aform için sabit
     }
-    return *this;
+    return *this; // zincirleme eşitleme işlemi için a = b = c *this şeklinde döndürüyoruz
 }
 
 // Destructor
@@ -45,9 +45,9 @@ int AForm::getExecuteGrade() const {
 }
 
 // Be Signed Function
-void AForm::beSigned(const Bureaucrat& bureaucrat) {
-    if (bureaucrat.getGrade() > _signGrade)
-        throw GradeTooLowException();
+void AForm::beSigned(const Bureaucrat& bureaucrat) { // imzalama işleminin yapılıdğı fonksiyon
+    if (bureaucrat.getGrade() > _signGrade) // imzaalama yetkisi matematiksel olarak büyük olduğunda işleyiş olarak yetersiz kalıyor yani imza yetki kontrolü yapılıyor
+        throw GradeTooLowException(); // istisnai durumda fırlatılan fonksiyon
     _isSigned = true;
 }
 

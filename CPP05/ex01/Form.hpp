@@ -3,19 +3,19 @@
 
 #include <iostream>
 #include <stdexcept>
+                    // bu dosyada bir form sınıfı oluşturmaktayız sınıfımızda 
+class Bureaucrat; // bu satırda Forward declaration kullanıyoruz yani Bureaucrat sınfıının içeriğine ihtiyaç duymamamıza rağmen ilerleyen süreçte varlığından emin olmamaız gerekeceği için şimdiden ilgili dosyada varlığını tanıtıyoruz
 
-class Bureaucrat; // Forward declaration
+class Form { // form adında bir sınıf oluşturuyoruz
+private: // private değiişkenlerinde 
+    const std::string _name; // isim
+    bool _isSigned;         // imzalı olup olmadığını kontrol eden bir boolen değer
+    const int _signGrade;  //  imzalamak için gerekli olan sabit derece derecesi yetmeyen bürokratlar imzalama işlemi yapamayacak
+    const int _executeGrade; // çalıştırmak için gerekli olan sabit derece
 
-class Form {
-private:
-    const std::string _name;
-    bool _isSigned;
-    const int _signGrade;
-    const int _executeGrade;
-
-public:
-    // Exception classes
-    class GradeTooHighException : public std::exception {
+public: 
+    // Exception classes 
+    class GradeTooHighException : public std::exception { // grade değerini kontrol eden mekanizmalar
     public:
         const char* what() const throw();
     };
@@ -38,7 +38,7 @@ public:
     int getSignGrade() const;
     int getExecuteGrade() const;
 
-    // Form actions
+    // Form actions formun imzalama işlemi
     void beSigned(const Bureaucrat& bureaucrat);
 };
 

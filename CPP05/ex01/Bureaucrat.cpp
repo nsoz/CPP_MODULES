@@ -2,7 +2,7 @@
 #include "Form.hpp"
 
 // Constructor
-Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {}
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {} // yapıcı liste ile başlatıldı
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
     if (grade < 1)
@@ -12,15 +12,15 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
     _grade = grade;
 }
 
-// Copy Constructor
+// Copy Constructor yapıcı liste ile başlatıldı
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {}
 
 // Assignment Operator
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-    if (this != &other) {
+    if (this != &other) { // aynı iki paremtereyi bir birine eşitlememek için alınan önlem
         _grade = other._grade;
     }
-    return *this;
+    return *this; //*this -> zincirleme atama olanağı
 }
 
 // Destructor
@@ -48,14 +48,14 @@ void Bureaucrat::decrementGrade() {
     _grade++;
 }
 
-// Signing Form Function
+// Signing Form Function imzalama aşaması
 void Bureaucrat::signForm(Form& form) {
-    try {
-        form.beSigned(*this);
-        std::cout << _name << " signed " << form.getName() << std::endl;
-    } catch (std::exception& e) {
-        std::cout << _name << " couldn't sign " << form.getName() 
-                  << " because " << e.what() << std::endl;
+    try { //imzalama deneniyor 
+        form.beSigned(*this); //ilgili bürokrat formu imzalamaya çalışıyor eğer bir exception dönerse catch bloğundaki referans exceptionu yakalayarak işeleve devam ediyor
+        std::cout << _name << " signed " << form.getName() << std::endl; // imzalama başarılı ise başaralı mesajını veriyor
+    } catch (std::exception& e) { // referans bir istisna sınıfını yakaladıysa
+        std::cout << _name << " couldn't sign " << form.getName()  // imza işlemi tamamlanamamıştır demek bu yüzden olumsuz mesaj yazdırılır
+                  << " because " << e.what() << std::endl; //e.what ise grade'in yetersiz olma sebebini yansıtır
     }
 }
 

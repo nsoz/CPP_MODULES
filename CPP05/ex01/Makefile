@@ -1,4 +1,4 @@
-NAME = bureaucrat
+NAME = form
 
 SRCS = Bureaucrat.cpp Form.cpp main.cpp
 

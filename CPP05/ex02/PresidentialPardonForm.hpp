@@ -4,11 +4,11 @@
 #include "AForm.hpp"
 #include <iostream>
 
-class PresidentialPardonForm : public AForm {
-private:
-    std::string _target;
+class PresidentialPardonForm : public AForm { // burada Aformdan miras alan bir PresidentialPardonForm sınıfı oluşturuyoruz
+private:                                     // Private değerlerde 
+    std::string _target;                    // Target adında bir string bulunduruyor
 
-public:
+public:                                   // public değişkkenlerinde ise otodok kaonik
     // Constructor and Destructor
     PresidentialPardonForm();
     PresidentialPardonForm(const std::string& target);
@@ -17,7 +17,7 @@ public:
     ~PresidentialPardonForm();
 
     // Execute function override
-    void execute(const Bureaucrat& executor) const;
+    void execute(const Bureaucrat& executor) const; // Aform sınıfında sanal bir şekilde olan execute fonksiyonunu bu sınıfda tanımlayacağız
 };
 
 #endif
