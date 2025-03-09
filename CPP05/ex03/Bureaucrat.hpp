@@ -11,7 +11,7 @@ private:
     int _grade;
 
 public:
-    // Exception classes
+    
     class GradeTooHighException : public std::exception {
     public:
         const char* what() const throw();
@@ -22,27 +22,27 @@ public:
         const char* what() const throw();
     };
 
-    // Constructor and Destructor
+    
     Bureaucrat();
     Bureaucrat(const std::string& name, int grade);
     Bureaucrat(const Bureaucrat& other);
     Bureaucrat& operator=(const Bureaucrat& other);
     ~Bureaucrat();
 
-    // Getters
+    
     std::string getName() const;
     int getGrade() const;
 
-    // Grade modification functions
+    
     void incrementGrade();
     void decrementGrade();
 
-    // Form functions
+    
     void signForm(AForm& form);
     void executeForm(const AForm& form) const;
 };
 
-// Overloaded << operator
+
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
 
 #endif

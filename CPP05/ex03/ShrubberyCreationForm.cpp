@@ -3,17 +3,17 @@
 #include <iostream>
 #include <fstream>
 
-// Constructor
+
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137), _target("Default") {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
     : AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-// Copy Constructor
+
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
     : AForm(other), _target(other._target) {}
 
-// Assignment Operator
+
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
     if (this != &other) {
         AForm::operator=(other);
@@ -22,10 +22,10 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     return *this;
 }
 
-// Destructor
+
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-// Execute function
+
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
     if (!isSigned())
         throw FormNotSignedException();

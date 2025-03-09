@@ -16,12 +16,12 @@ int main() {
         std::cout << robotomy << std::endl;
         std::cout << pardon << std::endl;
 
-        // Bob forms signing
+        
         bob.signForm(shrubbery);
         bob.signForm(robotomy);
         bob.signForm(pardon);
 
-        // Bob executes the forms
+        
         bob.executeForm(shrubbery);
         bob.executeForm(robotomy);
         bob.executeForm(pardon);

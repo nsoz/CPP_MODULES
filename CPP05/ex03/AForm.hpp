@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 
-class Bureaucrat; // Forward declaration
+class Bureaucrat; 
 
 class AForm {
 private:
@@ -14,7 +14,7 @@ private:
     const int _executeGrade;
 
 public:
-    // Exception classes
+    
     class GradeTooHighException : public std::exception {
     public:
         const char* what() const throw();
@@ -30,25 +30,25 @@ public:
         const char* what() const throw();
     };
 
-    // Constructor and Destructor
+    
     AForm();
     AForm(const std::string& name, int signGrade, int executeGrade);
     AForm(const AForm& other);
     AForm& operator=(const AForm& other);
     virtual ~AForm();
 
-    // Getters
+    
     std::string getName() const;
     bool isSigned() const;
     int getSignGrade() const;
     int getExecuteGrade() const;
 
-    // Form actions
+    
     void beSigned(const Bureaucrat& bureaucrat);
-    virtual void execute(const Bureaucrat& executor) const = 0; // Pure virtual function
+    virtual void execute(const Bureaucrat& executor) const = 0; 
 };
 
-// Overloaded << operator
+
 std::ostream& operator<<(std::ostream& os, const AForm& form);
 
 #endif

@@ -2,7 +2,7 @@
 #include "AForm.hpp"
 #include <iostream>
 
-// Constructor
+
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {}
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
@@ -13,10 +13,10 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
     _grade = grade;
 }
 
-// Copy Constructor
+
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {}
 
-// Assignment Operator
+
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
     if (this != &other) {
         _grade = other._grade;
@@ -24,10 +24,10 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
     return *this;
 }
 
-// Destructor
+
 Bureaucrat::~Bureaucrat() {}
 
-// Getters
+
 std::string Bureaucrat::getName() const {
     return _name;
 }
@@ -36,7 +36,7 @@ int Bureaucrat::getGrade() const {
     return _grade;
 }
 
-// Grade Modification Functions
+
 void Bureaucrat::incrementGrade() {
     if (_grade <= 1)
         throw GradeTooHighException();
@@ -49,7 +49,7 @@ void Bureaucrat::decrementGrade() {
     _grade++;
 }
 
-// Signing Form Function
+
 void Bureaucrat::signForm(AForm& form) {
     try {
         form.beSigned(*this);
@@ -60,7 +60,7 @@ void Bureaucrat::signForm(AForm& form) {
     }
 }
 
-// Execute Form Function
+
 void Bureaucrat::executeForm(const AForm& form) const {
     try {
         form.execute(*this);
@@ -71,7 +71,7 @@ void Bureaucrat::executeForm(const AForm& form) const {
     }
 }
 
-// Exception Messages
+
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
     return "Grade too high!";
 }
@@ -80,7 +80,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
     return "Grade too low!";
 }
 
-// Operator Overload
+
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
     os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
     return os;

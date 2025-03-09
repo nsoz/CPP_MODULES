@@ -28,7 +28,7 @@ int main() {
             bob.executeForm(*form3);
         }
 
-        // Clean up dynamically allocated forms
+        
         delete form1;
         delete form2;
         delete form3;
