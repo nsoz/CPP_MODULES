@@ -6,7 +6,6 @@
 #include <iostream>
 
 int main() {
-    try {
         Intern someRandomIntern;
         AForm* form1 = someRandomIntern.makeForm("robotomy request", "Bender");
         AForm* form2 = someRandomIntern.makeForm("shrubbery creation", "Garden");
@@ -14,7 +13,7 @@ int main() {
         AForm* invalidForm = someRandomIntern.makeForm("unknown form", "Nobody");
 
         Bureaucrat bob("Bob", 3);
-
+    try {
         if (form1) {
             bob.signForm(*form1);
             bob.executeForm(*form1);
@@ -27,16 +26,16 @@ int main() {
             bob.signForm(*form3);
             bob.executeForm(*form3);
         }
-
+        Bureaucrat ibo("ibo", 0);
         
-        delete form1;
-        delete form2;
-        delete form3;
-        delete invalidForm;
     }
     catch (std::exception &e) {
         std::cerr << "Exception caught: " << e.what() << std::endl;
     }
-
+    delete form1;
+    delete form2;
+    delete form3;
+    delete invalidForm;
+    system("leaks intern");
     return 0;
 }

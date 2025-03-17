@@ -53,5 +53,5 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
     }
     
     std::cerr << "Error: Form name \"" << formName << "\" not recognized!" << std::endl;
-    return nullptr;
+    return ;
 }
